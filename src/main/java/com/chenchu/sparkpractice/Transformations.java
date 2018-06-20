@@ -15,7 +15,9 @@ public class Transformations {
 		jsc.setLogLevel("OFF");
 		System.out.println(ss);
 		System.out.println(jsc);
-		
+		JavaRDD<Integer> mapRdd = irdd.map(x -> x+1);
+		System.out.println(mapRdd.collect());
+
 		
 	}
 }
