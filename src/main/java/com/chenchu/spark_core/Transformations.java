@@ -1,4 +1,4 @@
-package com.chenchu.sparkpractice;
+package com.chenchu.spark_core;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -26,18 +26,22 @@ public class Transformations {
 		System.out.println(jsc);
 		System.out.println("rdd partitions:" + irdd.getNumPartitions());
 		// map
+		System.out.println("================maps==============================");
 		JavaRDD<Integer> mapRdd = irdd.map(x -> x + 1);
 		System.out.println(mapRdd.collect());
 
 		// filter
+		System.out.println("========================filter========================");
 		JavaRDD<Integer> filterRdd = irdd.filter(x -> x > 1);
 		System.out.println(filterRdd.collect());
 
 		// flatmap
+		System.out.println("==============================flatmap==================================");
 		JavaRDD<String> flatmapRdd = sRdd.flatMap(str -> Arrays.asList(str.split(" ")).iterator());
 		System.out.println(flatmapRdd.collect());
 
 		// mappartitions
+		System.out.println("===================mappartition===========================");
 		JavaRDD<Integer> mapPartitionsRdd = irdd.mapPartitions(itr -> Arrays.asList(itr.next()).iterator());
 		System.out.println(mapPartitionsRdd.collect());
 
@@ -50,8 +54,10 @@ public class Transformations {
 			System.out.println();
 			return Arrays.asList("Abc").iterator();
 		};
+		System.out.println("=====================mappartitionwithindex===========================");
 		JavaRDD<String> mapPartitionsWithIndexRdd = irdd.mapPartitionsWithIndex(fun, true);
 		System.out.println(mapPartitionsWithIndexRdd.collect());
+
 		System.out.println("==============================sample() Example==========================");
 		JavaRDD<Integer> sampleRdd = irdd.sample(true, 0.5);
 		System.out.println(sampleRdd.collect());
@@ -74,24 +80,21 @@ public class Transformations {
 		System.out.println(distinctRdd.collect());
 
 		System.out.println("===================== tuple rdd==============");
-		
+
 		JavaRDD<String> flatMap = sRdd.flatMap(str -> Arrays.asList(str.split(" ")).iterator());
-		JavaPairRDD<String,Integer> mapToPair = flatMap.mapToPair(str -> new Tuple2<String,Integer>(str,1));
-		JavaPairRDD<String,Iterable<Integer>> groupByKey = mapToPair.groupByKey();
+		JavaPairRDD<String, Integer> mapToPair = flatMap.mapToPair(str -> new Tuple2<String, Integer>(str, 1));
+		System.out.println("==================groupbykey========================");
+		JavaPairRDD<String, Iterable<Integer>> groupByKey = mapToPair.groupByKey();
 		System.out.println(groupByKey.collect());
-		JavaPairRDD<String,Integer> reduceByKey = mapToPair.reduceByKey((a ,b ) -> a+b );
+		
+		System.out.println("===================reducebykey==============================");
+		JavaPairRDD<String, Integer> reduceByKey = mapToPair.reduceByKey((a, b) -> a + b);
 		System.out.println(reduceByKey.collect());
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		System.out.println("=====================sortByKey===================");
+		JavaPairRDD<String,Integer> sortByKey = mapToPair.sortByKey();
+		System.out.println(sortByKey.collect());
 		
 
 	}

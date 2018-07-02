@@ -1,4 +1,4 @@
-package com.chenchu.sparkpractice;
+package com.chenchu.spark_core;
 
 /**
  * Hello world!
