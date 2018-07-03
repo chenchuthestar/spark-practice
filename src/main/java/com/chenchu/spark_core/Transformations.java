@@ -86,16 +86,44 @@ public class Transformations {
 		System.out.println("==================groupbykey========================");
 		JavaPairRDD<String, Iterable<Integer>> groupByKey = mapToPair.groupByKey();
 		System.out.println(groupByKey.collect());
-		
+
 		System.out.println("===================reducebykey==============================");
 		JavaPairRDD<String, Integer> reduceByKey = mapToPair.reduceByKey((a, b) -> a + b);
 		System.out.println(reduceByKey.collect());
-		
-		
-		System.out.println("=====================sortByKey===================");
-		JavaPairRDD<String,Integer> sortByKey = mapToPair.sortByKey();
-		System.out.println(sortByKey.collect());
-		
 
+		System.out.println("=====================sortByKey===================");
+		JavaPairRDD<String, Integer> sortByKey = mapToPair.sortByKey();
+		System.out.println(sortByKey.collect());
+
+		System.out.println("==============================join()================================");
+		JavaPairRDD<Integer, String> animalpairRdd1 = jsc
+				.parallelize(Arrays.asList("dog", "salmon", "salmon", "rat", "elephant"))
+				.mapToPair(str -> new Tuple2<Integer, String>(str.length(), str));// .reduceByKey((a, b) -> a + b);
+		System.out.println(animalpairRdd1.collect());
+		JavaPairRDD<Integer, String> animalpairRdd2 = jsc
+				.parallelize(Arrays.asList("dog", "cat", "gnu", "salmon", "rabbit", "turkey", "wolf", "bear", "bee"))
+				.mapToPair(str -> new Tuple2<Integer, String>(str.length(), str));// .reduceByKey((a, b) -> a + b);
+		System.out.println(animalpairRdd2.collect());
+		JavaPairRDD<Integer, Tuple2<String, String>> join = animalpairRdd1.join(animalpairRdd2);
+
+		System.out.println(join.collect());
+
+		System.out.println("===========================cartesian()=========================");
+		JavaPairRDD<Integer, Tuple2<String, String>> cartitionjoin = animalpairRdd1.join(animalpairRdd2);
+		System.out.println(cartitionjoin.collect());
+		System.out.println("===========================cogroup()=========================");
+
+		JavaPairRDD<Integer, Tuple2<Iterable<String>, Iterable<String>>> cogroup = animalpairRdd1
+				.cogroup(animalpairRdd2);
+
+		System.out.println(cogroup.collect());
+
+		System.out.println("==============pipe()===================");
+		JavaRDD<String> pipe = sRdd.pipe("head -n 1");
+		System.out.println(pipe.collect());
+		System.out.println("=================coalesce & repartition=====================");
+		JavaRDD<String> coalesce = sRdd.coalesce(1);
+		JavaRDD<String> repartition = sRdd.repartition(1);
+		
 	}
 }
