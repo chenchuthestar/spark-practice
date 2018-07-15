@@ -124,6 +124,6 @@ public class Transformations {
 		System.out.println("=================coalesce & repartition=====================");
 		JavaRDD<String> coalesce = sRdd.coalesce(1);
 		JavaRDD<String> repartition = sRdd.repartition(1);
-		
+
 	}
 }

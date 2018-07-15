@@ -9,6 +9,6 @@ public class App
     public static void main( String[] args )
     {
         //swamy
-        System.out.println( "Hello World!" );
+        System.out.println("india is the great country".contains("the") );
     }
 }
