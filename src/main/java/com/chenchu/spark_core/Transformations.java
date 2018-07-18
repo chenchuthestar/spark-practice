@@ -19,7 +19,6 @@ public class Transformations {
 	static JavaRDD<String> sRdd = jsc
 			.parallelize(Arrays.asList("I am going", "to hyd", "I am learning", "hadoop course"));
 
-	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		jsc.setLogLevel("OFF");
 		System.out.println(ss);
