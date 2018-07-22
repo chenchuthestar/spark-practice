@@ -1,8 +1,0 @@
-/home/orienit/practice/spark/sparkpractice/src/main/java/com/chenchu/integrations/SparkCassandra.java
-/home/orienit/practice/spark/sparkpractice/src/main/java/com/chenchu/integrations/HbaseSparkRead.java
-/home/orienit/practice/spark/sparkpractice/src/main/java/com/chenchu/spark_core/App.java
-/home/orienit/practice/spark/sparkpractice/src/main/java/com/chenchu/spark_core/Actions.java
-/home/orienit/practice/spark/sparkpractice/src/main/java/com/chenchu/spark_core/Accumulators.java
-/home/orienit/practice/spark/sparkpractice/src/main/java/com/chenchu/spark_core/Transformations.java
-/home/orienit/practice/spark/sparkpractice/src/main/java/com/chenchu/spark_core/BroadCastVariables.java
-/home/orienit/practice/spark/sparkpractice/src/main/java/com/chenchu/integrations/SparkPhoenix.java
