@@ -21,10 +21,10 @@ public class TwitterStream {
 		JavaStreamingContext jssc = new JavaStreamingContext(new JavaSparkContext(sparkSession.sparkContext()),
 				Durations.seconds(5));
 
-		final String consumerKey = "jnc5okyQhTV9Ff3oRqKvY0K5x";
-		final String consumerSecret = "Qsrwwj1AngqdzJfqn5mEKCBuYQXsO6G9bjQKVJGD1bGQ7PFY7O";
-		final String accessToken = "1006408317307052032-e5LgWxeYODQ03ZTLrMuSaZb90WXx8C";
-		final String accessTokenSecret = "F6Dk6RYDOxFU44P6SS9qnJYNbf9VxNGiARwJFfkuXbDXs";
+		final String consumerKey = "*********************";
+		final String consumerSecret = "********************";
+		final String accessToken = "**************************";
+		final String accessTokenSecret = "**********************";
 
 		ConfigurationBuilder cb = new ConfigurationBuilder().setDebugEnabled(true).setOAuthConsumerKey(consumerKey)
 				.setOAuthConsumerSecret(consumerSecret).setOAuthAccessToken(accessToken)
