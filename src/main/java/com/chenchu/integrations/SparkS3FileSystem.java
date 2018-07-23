@@ -12,7 +12,7 @@ public class SparkS3FileSystem {
 
 	public static void main(String[] args) {
 		String fileloc = "s3n://chenchuthestar/chenchu";
-		SparkSession spark = SparkSession.builder().master("local[*]").appName("HbaseSparkRead").getOrCreate();
+		SparkSession spark = SparkSession.builder().master("local[*]").appName("spark-s3-coonector").getOrCreate();
 		JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());
 		jsc.setLogLevel("WARN");
 		jsc.hadoopConfiguration().set("fs.s3n.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem");

@@ -10,7 +10,7 @@ public class SparkHive {
 
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
-		SparkSession spark = SparkSession.builder().master("local[*]").appName("spark-oracle-connector")
+		SparkSession spark = SparkSession.builder().master("local[*]").appName("spark-hive")
 				.enableHiveSupport().getOrCreate();
 
 		Properties prop = new java.util.Properties();
