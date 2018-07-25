@@ -12,7 +12,9 @@ public class SparkS3FileSystem {
 
 	public static void main(String[] args) {
 		String fileloc = "s3n://chenchuthestar/chenchu";
-		SparkSession spark = SparkSession.builder().master("local[*]").appName("spark-s3-coonector").getOrCreate();
+		SparkSession spark = SparkSession.builder().master("local[*]").appName("spark-s3-coonector")
+				.config("spark.sql.warehouse.dir", System.getProperty("java.io.tmpdir") + "/spark-wherehouse")
+				.getOrCreate();
 		JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());
 		jsc.setLogLevel("WARN");
 		jsc.hadoopConfiguration().set("fs.s3n.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem");

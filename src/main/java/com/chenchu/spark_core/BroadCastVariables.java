@@ -8,7 +8,9 @@ import org.apache.spark.broadcast.Broadcast;
 import org.apache.spark.sql.SparkSession;
 
 public class BroadCastVariables {
-	static SparkSession ss = SparkSession.builder().appName("spark-practice").master("local[*]").getOrCreate();
+	static SparkSession ss = SparkSession.builder().appName("spark-practice").master("local[*]")
+			.config("spark.sql.warehouse.dir", System.getProperty("java.io.tmpdir") + "/spark-wherehouse")
+			.getOrCreate();
 	static JavaSparkContext jsc = new JavaSparkContext(ss.sparkContext());
 	static Broadcast<List<String>> broadcast = jsc.broadcast(stopWords());
 
@@ -28,8 +30,8 @@ public class BroadCastVariables {
 				return status;
 			});
 			System.out.println(filter.collect());
-			while(true) {
-				
+			while (true) {
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

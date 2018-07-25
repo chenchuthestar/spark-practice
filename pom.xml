@@ -114,7 +114,7 @@
 			<artifactId>ojdbc7</artifactId>
 			<version>12.1.0.1</version>
 		</dependency>
-		
+
 		<!-- spark-amazon s3 connector -->
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
@@ -132,6 +132,12 @@
 			<version>0.9.4</version>
 		</dependency>
 
+		<!-- spark-flume integration -->
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming-flume_2.11</artifactId>
+			<version>2.1.1</version>
+		</dependency>
 
 
 

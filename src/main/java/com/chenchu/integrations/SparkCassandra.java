@@ -15,8 +15,9 @@ public class SparkCassandra {
 		map.put("table", "student");
 		map.put("spark.cassandra.auth.username", "");
 		map.put("spark.cassandra.auth.password", "");
-		SparkSession ss = SparkSession.builder().appName("cassandra-connector").master("local[*]")
-				.getOrCreate();
+		SparkSession ss = SparkSession.builder().appName("cassandra-connector")
+				.config("spark.sql.warehouse.dir", System.getProperty("java.io.tmpdir") + "/spark-wherehouse")
+				.master("local[*]").getOrCreate();
 		Dataset<Row> dataset = ss.read().format("org.apache.spark.sql.cassandra").options(map).load();
 		dataset.show();
 

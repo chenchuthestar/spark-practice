@@ -15,7 +15,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class HbaseSparkRead {
 	public static void main(String[] args) {
-		SparkSession spark = SparkSession.builder().master("local[*]").appName("HbaseSparkRead").getOrCreate();
+		SparkSession spark = SparkSession.builder().master("local[*]").appName("HbaseSparkRead")
+				.config("spark.sql.warehouse.dir", System.getProperty("java.io.tmpdir") + "/spark-wherehouse")
+				.getOrCreate();
 		JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());
 		jsc.setLogLevel("WARN");
 		String catalog = "{ \"table\":{\"namespace\":\"default\", \"name\":\"emp\"}, \"rowkey\":\"id\",\"columns\":{ \"id\":{\"cf\":\"rowkey\", \"col\":\"id\", \"type\":\"string\"}, \"name\":{\"cf\":\"personal data\", \"col\":\"city\", \"type\":\"string\"},\"age\":{\"cf\":\"personal data\", \"col\":\"name\", \"type\":\"string\"} 	 }     }";
@@ -29,8 +31,7 @@ public class HbaseSparkRead {
 		load.show();
 	}
 
-	private void sparkDataSetWriteToHbase(){
-		
-		
+	private void sparkDataSetWriteToHbase() {
+
 	}
 }

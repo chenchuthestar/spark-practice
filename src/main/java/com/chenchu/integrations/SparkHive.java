@@ -11,6 +11,7 @@ public class SparkHive {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		SparkSession spark = SparkSession.builder().master("local[*]").appName("spark-hive")
+				.config("spark.sql.warehouse.dir", System.getProperty("java.io.tmpdir") + "/spark-wherehouse")
 				.enableHiveSupport().getOrCreate();
 
 		Properties prop = new java.util.Properties();

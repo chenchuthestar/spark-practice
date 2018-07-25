@@ -15,8 +15,9 @@ import twitter4j.conf.ConfigurationBuilder;
 public class TwitterStream {
 
 	public static void main(String[] args) {
-		SparkSession sparkSession = SparkSession.builder().master("local[*]").appName("spark session example")
-				.getOrCreate();
+		SparkSession sparkSession = SparkSession.builder().master("local[*]")
+				.config("spark.sql.warehouse.dir", System.getProperty("java.io.tmpdir") + "/spark-wherehouse")
+				.appName("spark session example").getOrCreate();
 		sparkSession.sparkContext().setLogLevel("OFF");
 		JavaStreamingContext jssc = new JavaStreamingContext(new JavaSparkContext(sparkSession.sparkContext()),
 				Durations.seconds(5));
@@ -29,7 +30,6 @@ public class TwitterStream {
 		ConfigurationBuilder cb = new ConfigurationBuilder().setDebugEnabled(true).setOAuthConsumerKey(consumerKey)
 				.setOAuthConsumerSecret(consumerSecret).setOAuthAccessToken(accessToken)
 				.setOAuthAccessTokenSecret(accessTokenSecret);
-		
 
 		OAuthAuthorization auth = new OAuthAuthorization(cb.build());
 

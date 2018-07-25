@@ -9,7 +9,9 @@ import org.apache.spark.util.LongAccumulator;
 
 public class Accumulators {
 
-	static SparkSession ss = SparkSession.builder().appName("accumulators-test").master("local[*]").getOrCreate();
+	static SparkSession ss = SparkSession.builder().appName("accumulators-test").master("local[*]")
+			.config("spark.sql.warehouse.dir", System.getProperty("java.io.tmpdir") + "/spark-wherehouse")
+			.getOrCreate();
 	static JavaSparkContext jsc = new JavaSparkContext(ss.sparkContext());
 
 	public static void main(String[] args) {

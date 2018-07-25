@@ -12,7 +12,9 @@ import org.apache.spark.sql.SparkSession;
 import scala.Tuple2;
 
 public class Actions {
-	static SparkSession ss = SparkSession.builder().appName("spark-practice").master("local[*]").getOrCreate();
+	static SparkSession ss = SparkSession.builder().appName("spark-practice").master("local[*]")
+			.config("spark.sql.warehouse.dir", System.getProperty("java.io.tmpdir") + "/spark-wherehouse")
+			.getOrCreate();
 	static JavaSparkContext jsc = new JavaSparkContext(ss.sparkContext());
 	static JavaRDD<Integer> irdd = jsc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
 	static JavaRDD<String> sRdd = jsc
@@ -84,11 +86,10 @@ public class Actions {
 		// 16.) countByKey
 		Map<String, Long> countByKey = mapToPair.countByKey();
 		System.out.println(countByKey);
-		
+
 		// 17.) glom()
 		JavaRDD<List<Integer>> glom = irdd.glom();
-		System.out.println(irdd.count()+"     "+glom.count());
-		
+		System.out.println(irdd.count() + "     " + glom.count());
 
 	}
 

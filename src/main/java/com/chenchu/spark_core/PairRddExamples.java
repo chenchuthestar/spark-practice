@@ -5,14 +5,14 @@ import java.util.Arrays;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.api.java.function.Function;
 import org.apache.spark.sql.SparkSession;
 
 import scala.Tuple2;
 
 public class PairRddExamples {
-
-	static SparkSession ss = SparkSession.builder().appName("spark-practice").master("local[*]").getOrCreate();
+	static SparkSession ss = SparkSession.builder().appName("spark-practice").master("local[*]")
+			.config("spark.sql.warehouse.dir", System.getProperty("java.io.tmpdir") + "/spark-wherehouse")
+			.getOrCreate();
 	static JavaSparkContext jsc = new JavaSparkContext(ss.sparkContext());
 	static JavaRDD<Integer> irdd = jsc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
 	static JavaRDD<String> sRdd = jsc
