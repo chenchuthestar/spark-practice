@@ -9,17 +9,19 @@ import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.apache.spark.streaming.flume.FlumeUtils;
 import org.apache.spark.streaming.flume.SparkFlumeEvent;
 
-public class Spark_Flume_Integration_PullBased {
-
+public class Spark_pushbased_Flume {
 	public static void main(String[] args) {
+
 		SparkSession sparkSession = SparkSession.builder().master("local[*]").appName("spark session example")
 				.getOrCreate();
+
 		sparkSession.sparkContext().setLogLevel("OFF");
+
 		JavaStreamingContext ssc = new JavaStreamingContext(new JavaSparkContext(sparkSession.sparkContext()),
 				Durations.seconds(5));
-		JavaReceiverInputDStream<SparkFlumeEvent> stream = FlumeUtils.createPollingStream(ssc, "localhost", 4444);
+		JavaReceiverInputDStream<SparkFlumeEvent> stream = FlumeUtils.createStream(ssc, "localhost", 4444);
 		JavaDStream<String> map = stream.map(sfe -> {
-			System.out.println("inside");
+			
 			return new String(sfe.event().getBody().array());
 		});
 
@@ -28,7 +30,6 @@ public class Spark_Flume_Integration_PullBased {
 		try {
 			ssc.awaitTermination();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
