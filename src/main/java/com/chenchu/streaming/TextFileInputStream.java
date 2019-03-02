@@ -19,7 +19,7 @@ public class TextFileInputStream {
 		JavaStreamingContext jssc = new JavaStreamingContext(new JavaSparkContext(sparkSession.sparkContext()),
 				Durations.seconds(5));
 
-		JavaDStream<String> tis = jssc.textFileStream("hdfs://localhost:8020/textFileStream/");
+		JavaDStream<String> tis = jssc.textFileStream("hdfs://localhost:9000/textFileStream/");
 
 		JavaPairDStream<String, Integer> wordCounts = tis.flatMap(x -> Arrays.asList(x.split(" ")).iterator())
 				.mapToPair(s -> new Tuple2<>(s, 1)).reduceByKey((i1, i2) -> i1 + i2);

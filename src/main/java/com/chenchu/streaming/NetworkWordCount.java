@@ -20,7 +20,7 @@ public class NetworkWordCount {
 		JavaStreamingContext ssc = new JavaStreamingContext(new JavaSparkContext(sparkSession.sparkContext()),
 				Durations.seconds(5));
 
-		JavaReceiverInputDStream<String> lines = ssc.socketTextStream("localhost", 11111);
+		JavaReceiverInputDStream<String> lines = ssc.socketTextStream("localhost", 12345);
 		JavaDStream<String> words = lines.flatMap(x -> Arrays.asList(x.split(" ")).iterator());
 		JavaPairDStream<String, Integer> wordCounts = words.mapToPair(s -> new Tuple2<>(s, 1))
 				.reduceByKey((i1, i2) -> i1 + i2);

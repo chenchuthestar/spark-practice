@@ -19,7 +19,7 @@ public class Spark_pushbased_Flume {
 
 		JavaStreamingContext ssc = new JavaStreamingContext(new JavaSparkContext(sparkSession.sparkContext()),
 				Durations.seconds(5));
-		JavaReceiverInputDStream<SparkFlumeEvent> stream = FlumeUtils.createStream(ssc, "localhost", 4444);
+		JavaReceiverInputDStream<SparkFlumeEvent> stream = FlumeUtils.createStream(ssc, "localhost", 4445);
 		JavaDStream<String> map = stream.map(sfe -> {
 			
 			return new String(sfe.event().getBody().array());

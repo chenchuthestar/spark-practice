@@ -17,7 +17,7 @@ public class Spark_Flume_Integration_PullBased {
 		sparkSession.sparkContext().setLogLevel("OFF");
 		JavaStreamingContext ssc = new JavaStreamingContext(new JavaSparkContext(sparkSession.sparkContext()),
 				Durations.seconds(5));
-		JavaReceiverInputDStream<SparkFlumeEvent> stream = FlumeUtils.createPollingStream(ssc, "localhost", 4444);
+		JavaReceiverInputDStream<SparkFlumeEvent> stream = FlumeUtils.createPollingStream(ssc, "localhost", 4445);
 		JavaDStream<String> map = stream.map(sfe -> {
 			System.out.println("inside");
 			return new String(sfe.event().getBody().array());
@@ -28,7 +28,6 @@ public class Spark_Flume_Integration_PullBased {
 		try {
 			ssc.awaitTermination();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
