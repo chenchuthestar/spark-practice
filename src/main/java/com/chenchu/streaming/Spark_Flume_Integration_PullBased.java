@@ -19,7 +19,6 @@ public class Spark_Flume_Integration_PullBased {
 				Durations.seconds(5));
 		JavaReceiverInputDStream<SparkFlumeEvent> stream = FlumeUtils.createPollingStream(ssc, "localhost", 4445);
 		JavaDStream<String> map = stream.map(sfe -> {
-			System.out.println("inside");
 			return new String(sfe.event().getBody().array());
 		});
 
@@ -32,3 +31,6 @@ public class Spark_Flume_Integration_PullBased {
 		}
 	}
 }
+
+
+
